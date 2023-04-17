@@ -1,0 +1,35 @@
+h1,p {
+background-color: white;
+color: black;
+border-radius: 10px;
+font-family: Arial, Helvetica, sans-serif;
+font-weight: bold;
+text-align: center;
+}
+body{
+color: #000000;
+background-color: lightblue;
+font-family: Arial, Helvetica, sans-serif;
+margin: 20px;
+}
+fieldset{
+border-style: double;
+border: 3px solid #000000;
+padding: 10px;
+radius: 10px;
+border-radius: 20px;
+}
+#language, translate_to, #translate_to, #translate_from, #sub {
+border: 2px solid #000000;
+radius: 10px;
+border-radius: 20px;
+}
+#sub {
+align: center;
+background-color: red;
+color: black;
+text-align: center;
+}
+#head {
+text-align: center;
+}
