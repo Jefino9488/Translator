@@ -44,7 +44,6 @@ numpy~=1.24.2
 setuptools~=67.6.1
 comtypes~=1.1.14
 psutil~=5.9.4
-pycaw~=20220416
 scipy~=1.10.1
 matplotlib~=3.7.1
 six~=1.16.0
