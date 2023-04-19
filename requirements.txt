@@ -81,3 +81,4 @@ pydub~=0.25.1
 pyAudioAnalysis~=0.3.14
 tqdm~=4.65.0
 playsound~=1.2.2
+pyproject-toml~=0.0.10
