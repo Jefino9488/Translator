@@ -2,18 +2,21 @@
 <html>
 <head>
     <title>Speech Translation App</title>
+    <meta charset="utf-8">
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <h1>Speech Translation App</h1>
-    <p id="subs">Use this app to translate your speech to another language.</p>
+    <header>
+        <h3 id="title">SS SPEECH</h3>
+
+    </header>
+    
     <div id="head">
-        <fieldset>
-            <form method="POST">
-                <label for="language">Select a language to speak:</label>
-                <select id="language" name="language">
+            <form method="POST" enctype="multipart/form-data">
+                <div id="lang">
+                <select for = "language" id="translate_from" name="language">
                     <option value="en">English</option>
                     <option value="hi">Hindi</option>
                     <option value="fr">French</option>
@@ -22,8 +25,8 @@
                     <option value="ta">Tamil</option>
                 </select>
                 <br>
+                <img id="img" src="/static/rs/translate.png" alt="translate" width="50" height="50">
                 <br>
-                <label for="translate_to">Select a language to translate to:</label>
                 <select id="translate_to" name="translate_to">
                     <option value="en">English</option>
                     <option value="hi">Hindi</option>
@@ -32,9 +35,53 @@
                     <option value="es">Spanish</option>
                     <option value="ta">Tamil</option>
                 </select>
+                </div>
                 <br>
                 <br>
-                <input id="sub" type="submit" value="Start to speak" onclick="startListening()">
+                <button id="sub"  onclick="startListening()"><img id="img1"src="/static/rs/translate.png"></button>
+                <input id="cfile" type="file" name="audio" accept="audio/*">
+                <h1>Record Audio</h1>
+	<audio id="audio"></audio>
+	<script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+	<script>
+		navigator.mediaDevices.getUserMedia({audio: true})
+		.then(stream => {
+			const recorder = new Recorder(stream);
+			const recordButton = document.getElementById('record');
+			const audioElement = document.getElementById('audio');
+
+			recordButton.addEventListener('click', () => {
+				if (recorder.recording) {
+					recorder.stop();
+					recordButton.textContent = 'Record';
+					audioElement.src = URL.createObjectURL(recorder.getBlob());
+					recorder.exportWAV(sendAudioToServer);
+				} else {
+					recorder.clear();
+					recorder.record();
+					recordButton.textContent = 'Stop';
+				}
+			});
+
+			function sendAudioToServer(blob) {
+				const formData = new FormData();
+				formData.append('audio', blob, 'recording.wav');
+				fetch('/upload-audio', {
+					method: 'POST',
+					body: formData
+				})
+				.then(response => {
+					if (response.ok) {
+						console.log('Audio sent successfully!');
+					} else {
+						console.error('Error sending audio:', response.status, response.statusText);
+					}
+				})
+				.catch(error => console.error('Error sending audio:', error));
+			}
+		})
+		.catch(error => console.error('Error getting user media:', error));
+	</script>
                 {% if error %}
                     <p>{{ error }}</p>
                 {% endif %}
@@ -52,6 +99,13 @@
                 <p>Translated text: {{ translated_text }}</p>
             </fieldset>
         {% endif %}
+        {% if audio_file %}
+    <br>
+    <audio controls autoplay>
+        <source src="{{ url_for('static', filename=audio_translated) }}" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+    {% endif %}
     </div>
 
     <script>
@@ -59,5 +113,6 @@
             document.getElementById("sub").value = "listening";
         }
     </script>
+</fieldset>
 </body>
 </html>
