@@ -1,0 +1,63 @@
+h1,#subs {
+background-color: white;
+color: black;
+border-radius: 10px;
+font-family: Arial, Helvetica, sans-serif;
+font-weight: bold;
+text-align: center;
+}
+body{
+background-color: #DEF2FF;
+color: #000000;
+font-family: Arial, Helvetica, sans-serif;
+margin: 20px;
+}
+#lang{
+    margin-top: 100px;
+    justify-content: center;
+    display: flex;
+    background-color: white;
+    justify-content: space-evenly;
+    border-radius: 10px;
+    border-color: white;
+}
+#img{
+    align-self: center;
+    height: 50px;
+    width: 50px;
+}
+
+#language,  #translate_to, #translate_from, #sub {
+height:fit-content;
+height: 40px;
+border-color: white;
+padding: auto;
+width: auto;
+}
+
+#sub {
+align-self: center;
+margin-left: auto;
+height: 50px;
+width: 75px;
+margin-left: 30px;
+margin-right: 30px;
+background-color:#DEF2FF ;
+border: 0px;
+color: #ffffff;
+}
+#cfile{
+    padding-top: 20px;
+  padding-left: 130px;
+}
+#img1{
+    align-self: center;
+    height: 50px;
+    width: 50px;
+}
+#head {
+text-align: center;
+}
+#body {
+margin: 10px;
+}
