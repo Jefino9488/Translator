@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Speech Translation App</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Glitch&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@500&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.8.0/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/speech-commands@0.5.2/dist/speech-commands.min.js"></script>
+    <script src="/static/main.js"></script>
+</head>
+<body>
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="https://jefino9488.github.io/Portfolio/" target="_blank">About</a>
+    <a href="#">Services</a>
+    <a href="#">Clients</a>
+    <a href="#">Contact</a>
+    <label id='toggle'></label>
+</div>
+<span style="font-size:30px;cursor:pointer" onclick="openNav()" class="logo">&#9776; SPHINX</span>
+<div id="head">
+    <form method="POST" enctype="multipart/form-data">
+        <div id="lang">
+            <label for="translate_from"></label><select id="translate_from" name="language">
+            <option value="en">English</option>
+            <option value="hi">Hindi</option>
+            <option value="fr">French</option>
+            <option value="de">German</option>
+            <option value="es">Spanish</option>
+            <option value="ta">Tamil</option>
+        </select>
+            <button type="button" onclick="swapSections()" >Swap Sections</button>
+            <label for="translate_to"></label><select id="translate_to" name="translate_to">
+            <option value="en">English</option>
+            <option value="hi">Hindi</option>
+            <option value="fr">French</option>
+            <option value="de">German</option>
+            <option value="es">Spanish</option>
+            <option value="ta">Tamil</option>
+        </select>
+        </div>
+        <br>
+        <br>
+        <div id="idunno">
+            <label for="sub"></label><button id="sub" onclick="startListening()"><img id="img1" src="mic3 - Copy.png"></button>
+        </div>
+        <input id="cfile" type="file" name="audio" accept="audio/*">
+        <audio id="audio"></audio>
+        <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+        <br>
+        <p id="itscool">
+                    {% if error %}
+                    {{ error }}
+                    {% endif %}
+                    {% if text %}
+                    You said: {{ text }}
+                    {% endif %}
+        </p>
+    </form>
+    <br>
+    <div id="main">
+        {% if translated_text %}
+
+        {% endif %}
+        {% if audio_file %}
+        <br>
+        <audio controls autoplay>
+            <source src="{{ url_for('static', filename=audio_translated) }}" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
+        {% endif %}
+    </div>
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+
+        function startListening() {
+            startRecording();
+        }
+
+        function swapSections() {
+            let a = document.getElementById("translate_from").value;
+            let b = document.getElementById("translate_to").value;
+            document.getElementById("translate_from").value = b;
+            document.getElementById("translate_to").value = a;
+        }
+    </script>
+</div>
+</body>
+</html>

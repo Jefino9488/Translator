@@ -1,63 +1,193 @@
-h1,#subs {
-background-color: white;
-color: black;
-border-radius: 10px;
-font-family: Arial, Helvetica, sans-serif;
-font-weight: bold;
-text-align: center;
+h1,
+#subs {
+
+    border-radius: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    text-align: center;
 }
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: white;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+span{
+    font-family: Chivo Mono;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: black;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+
+    .sidenav a {
+        font-size: 18px;
+    }
+}
+
+
 body{
-background-color: #DEF2FF;
-color: #000000;
-font-family: Arial, Helvetica, sans-serif;
-margin: 20px;
+    background-color: rgb(83, 80, 148);
+    color: white;
+    height: fit-content;
+    font-family: Arial, Helvetica, sans-serif;
 }
-#lang{
+
+#lang {
     margin-top: 100px;
     justify-content: center;
     display: flex;
-    background-color: white;
+    padding-top: 10px;
+    border-style: none;
+    border: 0px;
+    /* background:linear-gradient(to bottom left,#4195f6,lightblue); */
     justify-content: space-evenly;
     border-radius: 10px;
-    border-color: white;
-}
-#img{
-    align-self: center;
-    height: 50px;
-    width: 50px;
 }
 
-#language,  #translate_to, #translate_from, #sub {
-height:fit-content;
-height: 40px;
-border-color: white;
-padding: auto;
-width: auto;
+#img {
+    align-self: center;
+    height: 50px;
+
+}
+#itscool{
+    color: black;
+}
+
+#language,
+#translate_to,
+#translate_from,
+#sub {
+    height: fit-content;
+    height: 40px;
+    background-color:#f3f4f7;
+    color: black;
+    border-style: none;
+    font-family: Fira sans;
+    font-size: medium;
+    padding: auto;
+    height: 38px;
+    border: 0px;
+    border-style: none;
+    width: auto;
+}
+#translate_from{
+    font-size: small;
+    background-color: #d6d8da;
+    border-radius: 10px;
+}
+#translate_to {
+    font-size: small;
+    background-color: #d6d8da;
+    border-radius: 10px;
+}
+#main{
+    color: black;
 }
 
 #sub {
-align-self: center;
-margin-left: auto;
-height: 50px;
-width: 75px;
-margin-left: 30px;
-margin-right: 30px;
-background-color:#DEF2FF ;
-border: 0px;
-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0);
+    align-self: center;
+    height: 50px;
+    border: 0px;
 }
-#cfile{
-    padding-top: 20px;
-  padding-left: 130px;
-}
-#img1{
+
+
+
+#img1 {
+    width: fit-content;
     align-self: center;
     height: 50px;
     width: 50px;
+    background-color: #cdcdcd;
+    border-radius: 40%;
 }
+
 #head {
-text-align: center;
+    margin: 10px;
+    text-align: center;
+    margin-top: 100px;
+    height: fit-content;
+    background-color: #d9c9edc4;
+    border-style: solid;
+    border-color: darkgrey;
+    border-radius: 20px;
+    padding-bottom: 20px;
 }
-#body {
-margin: 10px;
+
+#title{
+    font-family: Chivo Mono;
+    font-size: x-large;
+    background-color: #4195f6;;
+    height: fit-content;
+    display: flex;
 }
+#nav{
+    text-decoration: none;
+    display:flex;
+    display: inline;
+    background-color:#4195f6;
+    text-align: center;
+}
+#contents{
+    display: flex;
+    font-family: Concert One;
+    font-size: small;
+    gap: 1rem;
+    list-style: none;
+    margin-top: 25px;
+
+}
+#heading{
+    font-family: Rubik Glitch;
+    height: 50px;
+    font-size: small;
+    padding-top: 20px;
+    justify-content: center;
+
+}
+#items{
+    list-style: none;
+    margin-top: 40px;
+    height: fit-content;
+}
+a{
+
+    text-decoration: none;
+    font-size: larger;
+    font-weight: bold;
+    color: navy;
+}
+.swapbu{
+    border-radius: 20px;
+
+}
+
