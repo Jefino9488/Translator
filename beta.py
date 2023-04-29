@@ -24,17 +24,7 @@ def record():
     return audio
 
 
-def play_audio(audio):
-    return send_file(audio, mimetype="audio/mp3")
-
-
-def say(text):
-    text = gtts.gTTS(text)
-    text.save("output.mp3")
-    return send_file("output.mp3", mimetype="audio/mp3")
-
-
-def translate(text, lang):
+def translate(self, lang):
     translator = Translator()
     result = translator.translate(text, dest=lang)
     return result.text
@@ -50,12 +40,10 @@ def recognize(audio):
 
     except rec.UnknownValueError:
         print("Google Speech Recognition could not understand audio")
-        say("Sorry, I could not understand what you said. Please try again.")
         return "Error: Could not understand audio. Please try again."
 
     except rec.RequestError as e:
         print("Could not request results from Google Speech Recognition service; {0}".format(e))
-        say("Sorry, an error occurred. Please try again.")
         return f"Error: Could not request results from Google Speech Recognition service; {e}"
 
 
@@ -71,11 +59,9 @@ def main():
             return render_template('index.html', error=text)
 
         translated = translate(text, out_lang)
-        print(f"Translated text: {translated}")
-        say(translated)
-        os.remove("output.mp3")
+        print(f"Translated self: {translated}")
         os.remove("audio.wav")
-        return render_template('index.html', translated_text=translated, text=text, audio_translated=say(translated))
+        return render_template('index.html', translated_text=translated, text=text)
     return render_template('index.html')
 
 

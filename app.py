@@ -12,17 +12,27 @@ mic = rec.Microphone()
 a = ""
 
 
-def say(text):
+def say(self):
     text = gtts.gTTS(text)
     text.save("output.mp3")
     playsound("output.mp3")
     os.remove("output.mp3")
 
 
-def translate(text, lang):
+def translate(self, lang):
     translator = Translator()
     result = translator.translate(text, dest=lang)
     return result.text
+
+
+@app.route('/upload-audio', methods=['POST'])
+def upload_audio():
+    audio_file = request.files['audio']
+    # Save the audio file to the server
+    audio_file.save('recording.wav')
+    # Process the audio file (e.g., transcribe it, analyze it, etc.)
+    # ...
+    return 'Audio received!'
 
 
 def listen():
@@ -62,7 +72,7 @@ def main():
             return render_template('index.html', error=text)
 
         translated = translate(text, out_lang)
-        print(f"Translated text: {translated}")
+        print(f"Translated self: {translated}")
         say(translated)
         return render_template('index.html', translated_text=translated, text=text)
     return render_template('index.html')

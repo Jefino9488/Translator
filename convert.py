@@ -1,21 +1,22 @@
 import os
 import speech_recognition as sr
-import whisper
 from googletrans import Translator
 from gtts import gTTS
-from transformers import MBartForConditionalGeneration, MBart50TokenizerFast, AutoTokenizer, \
-    AutoModelForSeq2SeqLM
+from transformers import MBartForConditionalGeneration, MBart50TokenizerFast
 
-model = MBartForConditionalGeneration.from_pretrained("facebook/mbart-large-50-many-to-many-mmt")
-tokenizer = MBart50TokenizerFast.from_pretrained("facebook/mbart-large-50-many-to-many-mmt")
+try:
+    model = MBartForConditionalGeneration.from_pretrained("facebook/mbart-large-50-many-to-many-mmt")
+    tokenizer = MBart50TokenizerFast.from_pretrained("facebook/mbart-large-50-many-to-many-mmt")
+except Exception as e:
+    print("An error occurred:", str(e))
 
 
 class SpeechRecognizer:
     def __init__(self):
         self.recognizer = sr.Recognizer()
 
-    def record_audio(self):
-        with sr.AudioFile(self) as source:
+    def record_audio(self, audio_file):
+        with sr.AudioFile(audio_file) as source:
             audio = self.recognizer.record(source)
         return audio
 
@@ -29,10 +30,9 @@ class SpeechRecognizer:
         except sr.RequestError as e:
             print("Google error; {0}".format(e))
 
-    def recognize_sphinx(self, audio, lang='en-US'):
+    def recognize_sphinx(self, audio, lang='en-US'):  # offline
         try:
             text = self.recognizer.recognize_sphinx(audio, language=lang)
-            print(text)
             return text
         except sr.UnknownValueError:
             print("Sphinx could not understand audio")
@@ -48,18 +48,6 @@ class SpeechRecognizer:
             print("Wit could not understand audio")
         except sr.RequestError as e:
             print("Wit error; {0}".format(e))
-
-    @staticmethod
-    def recognize_whisper(self, audio, lang='en-US'):
-        try:
-            model = whisper.load_model("base")
-            result = model.transcribe("audio.mp3", lang=lang)
-            print(result["text"])
-            return result["text"]
-        except sr.UnknownValueError:
-            print("Whisper could not understand audio")
-        except sr.RequestError as e:
-            print("Whisper error; {0}".format(e))
 
 
 class Translate:
@@ -92,13 +80,16 @@ class TextToSpeech:
     def tts_google(self, lang):
         tts = gTTS(text="{}".format(self), lang="{}".format(lang), slow=False)
         tts.save("{}.mp3".format(self))
-        os.system("{}.mp3".format(self))
+        audio = os.system("{}.mp3".format(self))
+        return audio
 
-    def tts_mbart(self, lang):
-        model_name = "t5-base"
-        token = AutoTokenizer.from_pretrained(model_name)
-        mode = AutoModelForSeq2SeqLM.from_pretrained(model_name)
-        text = "{}".format(self)
-        input_ids = token.encode(text, return_tensors="pt")
-        outputs = mode.generate(input_ids=input_ids, num_beams=5, early_stopping=True, max_new_tokens=100)
-        return outputs
+    def tts_mbart(self, lang, des):
+        article = "{}".format(self)
+        tokenizer.src_lang = "{}".format(lang)
+        encoded = tokenizer(article, return_tensors="pt")
+        generated_tokens = model.generate(
+            **encoded,
+            forced_bos_token_id=tokenizer.lang_code_to_id["{}".format(des)]
+        )
+        translations = tokenizer.batch_decode(generated_tokens, skip_special_tokens=True)
+        return translations

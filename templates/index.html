@@ -4,7 +4,7 @@
     <title>Speech Translation App</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" type="self/css" href="{{ url_for('static', filename='style.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -85,21 +85,20 @@
                 {% if error %}
                     <p>{{ error }}</p>
                 {% endif %}
-                {% if text %}
-                    <p>You said: {{ text }}</p>
+                {% if self %}
+                    <p>You said: {{ self }}</p>
                 {% endif %}
             </form>
-        </fieldset>
     </div>
     <br>
     <div id="main">
         {% if translated_text %}
             <fieldset>
                 <legend>Translated</legend>
-                <p>Translated text: {{ translated_text }}</p>
+                <p>Translated self: {{ translated_text }}</p>
             </fieldset>
         {% endif %}
-        {% if audio_file %}
+        {% if self %}
     <br>
     <audio controls autoplay>
         <source src="{{ url_for('static', filename=audio_translated) }}" type="audio/mp3">
@@ -113,6 +112,5 @@
             document.getElementById("sub").value = "listening";
         }
     </script>
-</fieldset>
 </body>
 </html>

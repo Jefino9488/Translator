@@ -3,7 +3,8 @@
 <head>
     <title>Speech Translation App</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" type="self/css" href="{{ url_for('static', filename='style_beta.css') }}">
+    <link rel="stylesheet" href="/static/style_beta.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,6 +18,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@500&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="height=device-height, initial-scale=1.0">
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.8.0/dist/tf.min.js"></script>
@@ -36,7 +38,7 @@
 <div id="head">
     <form method="POST" enctype="multipart/form-data">
         <div id="lang">
-            <label for="translate_from"></label><select id="translate_from" name="language">
+            <select id="translate_from" name="language">
             <option value="en">English</option>
             <option value="hi">Hindi</option>
             <option value="fr">French</option>
@@ -44,8 +46,8 @@
             <option value="es">Spanish</option>
             <option value="ta">Tamil</option>
         </select>
-            <button type="button" onclick="swapSections()" >Swap Sections</button>
-            <label for="translate_to"></label><select id="translate_to" name="translate_to">
+            <button type="button" id="swap" onclick="swapSections()" ><img id="swap_img" src="/static/rs/swap.png" alt=""></button>
+            <select id="translate_to" name="translate_to">
             <option value="en">English</option>
             <option value="hi">Hindi</option>
             <option value="fr">French</option>
@@ -57,7 +59,7 @@
         <br>
         <br>
         <div id="idunno">
-            <label for="sub"></label><button id="sub" onclick="startListening()"><img id="img1" src="mic3 - Copy.png"></button>
+            <button id="sub" onclick="startListening()"><img id="img1" src="/static/rs/mic.png" alt=""></button>
         </div>
         <input id="cfile" type="file" name="audio" accept="audio/*">
         <audio id="audio"></audio>
@@ -75,7 +77,6 @@
     <br>
     <div id="main">
         {% if translated_text %}
-
         {% endif %}
         {% if audio_file %}
         <br>

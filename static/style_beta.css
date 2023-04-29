@@ -1,0 +1,227 @@
+h1,
+#subs {
+
+    border-radius: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    text-align: center;
+}
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: white;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+span{
+    font-family: Chivo Mono;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: black;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+
+    .sidenav a {
+        font-size: 18px;
+    }
+}
+
+
+html{
+    background-color: rgba(176, 4, 255, 0.777);
+    background: linear-gradient(to bottom right, #6b00f7, rgb(208, 0, 249));
+    color: white;
+    height: 100%;
+    overflow: auto;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#lang {
+    margin-top: 100px;
+    justify-content: center;
+    display: flex;
+    padding-top: 10px;
+    border-style: none;
+    border: 0px;
+    /* background:linear-gradient(to bottom left,#4195f6,lightblue); */
+    justify-content: space-evenly;
+    border-radius: 10px;
+}
+
+#img {
+    align-self: center;
+    height: 50px;
+
+}
+#itscool{
+    color: black;
+}
+
+#language,
+#translate_to,
+#translate_from {
+    height: fit-content;
+    height: 40px;
+    background-color:#f3f4f7;
+    color: black;
+    border-style: none;
+    font-family: Fira sans;
+    font-size: medium;
+    height: 38px;
+    border: 0px;
+    border-style: none;
+    width: auto;
+}
+#translate_from{
+    font-size: small;
+    background-color: #d6d8da;
+    border-radius: 5px;
+    width: 80px;
+    text-align: center;
+}
+#translate_to {
+    font-size: small;
+    background-color: #d6d8da;
+    border-radius: 5px;
+    width: 80px;
+    text-align: center;
+}
+#main{
+    color: black;
+}
+
+#sub {
+    background-color: rgba(255, 255, 255, 0);
+    align-self: center;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    border: 0px;
+}
+
+
+
+#img1 {
+    width: fit-content;
+    align-self: center;
+    height: 100px;
+    width: 90px;
+    background-color: #cdcdcd;
+    border-radius: 50%;
+}
+
+#head {
+    margin: 0px;
+    text-align: center;
+    margin-top: 40px;
+    height: 10%;
+    background-color: rgba(255, 255, 255, 0.988);
+    border-style: solid;
+    border-color: darkgrey;
+    border-radius: 15px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+form {
+    display: flex;
+    justify-content: space-evenly;
+    margin-left: 0%;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 10px;
+}
+#title{
+    font-family: Chivo Mono;
+    font-size: x-large;
+    background-color: #4195f6;;
+    height: fit-content;
+    display: flex;
+}
+#nav{
+    text-decoration: none;
+    display:flex;
+    display: inline;
+    background-color:#4195f6;
+    text-align: center;
+}
+#contents{
+    display: flex;
+    font-family: Concert One;
+    font-size: small;
+    gap: 1rem;
+    list-style: none;
+    margin-top: 25px;
+
+}
+#heading{
+    font-family: Rubik Glitch;
+    height: 50px;
+    font-size: small;
+    padding-top: 20px;
+    justify-content: center;
+
+}
+#items{
+    list-style: none;
+    margin-top: 40px;
+    height: fit-content;
+}
+a{
+    text-decoration: none;
+    font-size: larger;
+    font-weight: bold;
+    color: navy;
+}
+.swapbu{
+    border-radius: 20px;
+}
+#swap{
+    border-radius: 5px;
+    background-color: #cdcdcd;
+    color: black;
+    border: 0px;
+    height: 40px;
+    width: 70px;
+}
+
+#swap_img {
+    margin-top: 5px;
+    height: 30px;
+    width: 30px;
+    background-color: #cdcdcd;
+    border-radius: 50%;
+}
+
+audio {
+    display: none;
+}
