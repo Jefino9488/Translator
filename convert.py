@@ -15,12 +15,12 @@ class SpeechRecognizer:
     def __init__(self):
         self.recognizer = sr.Recognizer()
 
-    def record_audio(self, audio_file):
+    def record_audio(self, audio_file):  # audio_file pass
         with sr.AudioFile(audio_file) as source:
             audio = self.recognizer.record(source)
-        return audio
+        return audio  # use  this audio
 
-    def recognize_google(self, audio, lang='en-US'):
+    def recognize_google(self, audio, lang='en-US'):  # online
         try:
             text = self.recognizer.recognize_google(audio, language=lang)
             print(text)
@@ -39,9 +39,9 @@ class SpeechRecognizer:
         except sr.RequestError as e:
             print("Sphinx error; {0}".format(e))
 
-    def recognize_wit(self, audio, lang='en-US'):
+    def recognize_wit(self, audio, lang='en-US'):  # online
         try:
-            text = self.recognizer.recognize_wit(audio, key="WIT_AI_KEY")
+            text = self.recognizer.recognize_wit(audio, key="WIT_AI_KEY")  # need to add key
             print(text)
             return text
         except sr.UnknownValueError:
@@ -50,12 +50,12 @@ class SpeechRecognizer:
             print("Wit error; {0}".format(e))
 
 
-class Translate:
+class Translate:  # translate text
     def __init__(self):
         self.model = MBartForConditionalGeneration.from_pretrained("facebook/mbart-large-50-many-to-many-mmt")
         self.tokenizer = MBart50TokenizerFast.from_pretrained("facebook/mbart-large-50-many-to-many-mmt")
 
-    def trans_mbart(self, lang, des):
+    def trans_mbart(self, lang, des):  # translate text using mbart
         article = "{}".format(self)
         tokenizer.src_lang = "{}".format(lang)
         encoded_hi = tokenizer(article, return_tensors="pt")
@@ -66,24 +66,24 @@ class Translate:
         translations = tokenizer.batch_decode(generated_tokens, skip_special_tokens=True)
         return translations
 
-    def trans_google(self, lang, des):
+    def trans_google(self, lang, des):  # translate text using googletrans
         text = "{}".format(self)
         translator = Translator()
         translations = translator.translate(text, src="{}".format(lang), dest="{}".format(des))
         return translations.text
 
 
-class TextToSpeech:
+class TextToSpeech:  # text to speech
     def __init__(self):
         self.text = "{}".format(self)
 
-    def tts_google(self, lang):
+    def tts_google(self, lang):  # text to speech using googletrans
         tts = gTTS(text="{}".format(self), lang="{}".format(lang), slow=False)
         tts.save("{}.mp3".format(self))
         audio = os.system("{}.mp3".format(self))
-        return audio
+        return audio  # save audio file
 
-    def tts_mbart(self, lang, des):
+    def tts_mbart(self, lang, des):  # not tested
         article = "{}".format(self)
         tokenizer.src_lang = "{}".format(lang)
         encoded = tokenizer(article, return_tensors="pt")
