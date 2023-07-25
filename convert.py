@@ -50,27 +50,29 @@ class SpeechRecognizer:
             print("Wit error; {0}".format(e))
 
 
+def trans_mbart(text, lang, des):  # translate text using mbart
+    article = "{}".format(text)
+    tokenizer.src_lang = "{}".format(lang)
+    encoded_hi = tokenizer(article, return_tensors="pt")
+    generated_tokens = model.generate(
+        **encoded_hi,
+        forced_bos_token_id=tokenizer.lang_code_to_id["{}".format(des)]
+    )
+    translations = tokenizer.batch_decode(generated_tokens, skip_special_tokens=True)
+    return translations
+
+
 class Translate:  # translate text
     def __init__(self):
+        self.text = None
         self.model = MBartForConditionalGeneration.from_pretrained("facebook/mbart-large-50-many-to-many-mmt")
         self.tokenizer = MBart50TokenizerFast.from_pretrained("facebook/mbart-large-50-many-to-many-mmt")
-
-    def trans_mbart(self, lang, des):  # translate text using mbart
-        article = "{}".format(self)
-        tokenizer.src_lang = "{}".format(lang)
-        encoded_hi = tokenizer(article, return_tensors="pt")
-        generated_tokens = model.generate(
-            **encoded_hi,
-            forced_bos_token_id=tokenizer.lang_code_to_id["{}".format(des)]
-        )
-        translations = tokenizer.batch_decode(generated_tokens, skip_special_tokens=True)
-        return translations
 
     def trans_google(self, lang, des):  # translate text using googletrans
         text = "{}".format(self)
         translator = Translator()
         translations = translator.translate(text, src="{}".format(lang), dest="{}".format(des))
-        return translations.text
+        return translations.textc
 
 
 class TextToSpeech:  # text to speech

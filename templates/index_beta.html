@@ -69,8 +69,8 @@
                     {% if error %}
                     {{ error }}
                     {% endif %}
-                    {% if text %}
-                    You said: {{ text }}
+                    {% if self %}
+                    You said: {{ self }}
                     {% endif %}
         </p>
     </form>
@@ -107,5 +107,11 @@
         }
     </script>
 </div>
+<div class="container">
+    <div class="display">
+
+    </div>
+</div>
 </body>
+<script src="/static/recorder.js"></script>
 </html>
